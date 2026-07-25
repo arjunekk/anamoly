@@ -34,3 +34,24 @@ are harder to separate from normal variation than structural defects
 If additional product categories are added, thresholds should be
 recalibrated per category using the same method, since "normal"
 appearance varies significantly between product types.
+
+## Confirmed Edge Case Behavior
+
+Verified via backend/tests/test_severity_and_recommendations.py:
+
+- A contamination sample scoring 29.59 is classified as **Severity.NONE**
+  ("no defect detected"), despite being a genuine defect in the ground truth.
+  This is a confirmed false negative — the current threshold-based system
+  will occasionally miss subtle contamination defects.
+
+## Implication for Production Use
+
+This system is a portfolio/demonstration project and this limitation should
+be disclosed, not hidden. A production deployment would likely need:
+- Per-category threshold tuning with a larger calibration set
+- A secondary check (e.g. lower "review" threshold that flags borderline
+  scores for human inspection rather than auto-passing them)
+- Possibly a different anomaly detection approach for texture-based defects
+  specifically, since PatchCore's patch-distance method separates
+  structural defects (cracks, breaks) more reliably than subtle textural
+  ones (contamination)
