@@ -11,3 +11,6 @@ uvicorn[standard]
 # Utilities
 pillow
 scikit-learn
+
+# Visualization (used for dataset exploration and debugging, Phase 2 onward)
+matplotlib
