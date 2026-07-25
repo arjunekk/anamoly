@@ -1,0 +1,24 @@
+# Python
+venv/
+__pycache__/
+*.pyc
+.env
+
+# Datasets (too large for git, documented separately in README)
+dataset/mvtec_ad/*
+!dataset/mvtec_ad/.gitkeep
+
+# Model artifacts
+models/*
+!models/.gitkeep
+
+# Generated reports
+reports/*
+!reports/.gitkeep
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store

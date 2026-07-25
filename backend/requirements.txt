@@ -1,0 +1,13 @@
+# Core AI / ML
+torch
+torchvision
+numpy
+opencv-python
+
+# Backend (added now so environment is stable; not wired in until Phase 9)
+fastapi
+uvicorn[standard]
+
+# Utilities
+pillow
+scikit-learn
