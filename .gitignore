@@ -22,3 +22,7 @@ reports/*
 
 # OS
 .DS_Store
+
+# DB
+.env
+backend/.env

@@ -14,3 +14,9 @@ scikit-learn
 
 # Visualization (used for dataset exploration and debugging, Phase 2 onward)
 matplotlib
+
+# Database 
+sqlalchemy
+psycopg2-binary
+alembic
+python-dotenv

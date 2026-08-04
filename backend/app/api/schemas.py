@@ -15,3 +15,15 @@ class InspectionResult(BaseModel):
     severity: str
     recommendations: list[str]
     heatmap_url: str
+
+from datetime import datetime
+
+
+class InspectionHistoryItem(BaseModel):
+    id: int
+    product_category: str
+    anomaly_score: float
+    severity: str
+    recommendation: str
+    heatmap_url: str
+    timestamp: datetime
