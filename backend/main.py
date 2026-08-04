@@ -12,7 +12,6 @@ from app.api.model_state import load_patchcore_model
 from app.api.inspection_routes import router as inspection_router
 from app.api.history_routes import router as history_router
 from app.api.dashboard_routes import router as dashboard_router
-app.include_router(dashboard_router)
 
 
 @asynccontextmanager
@@ -36,6 +35,7 @@ app.mount("/static/heatmaps", StaticFiles(directory=str(HEATMAP_DIR)), name="hea
 
 app.include_router(inspection_router)
 app.include_router(history_router)
+app.include_router(dashboard_router)
 
 
 @app.get("/health")
