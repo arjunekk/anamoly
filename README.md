@@ -105,37 +105,41 @@ Runs at `http://localhost:5173`.
 ---
 
 ## Project Structure
+<details>
+<summary><strong>📁 Project Structure</strong></summary>
+
+```text
 anamoly_detection/
 ├── backend/
-│ ├── app/
-│ │ ├── api/ # FastAPI routes (inspection, history, dashboard, reports)
-│ │ ├── core/ # config
-│ │ ├── preprocessing/ # image transforms, dataset loader, dataloader
-│ │ ├── feature_extraction/ # WideResNet50-2 wrapper
-│ │ ├── anomaly_detection/ # patch aggregation, memory bank, PatchCore, inference, heatmaps
-│ │ ├── severity/ # severity estimation (calibrated thresholds)
-│ │ ├── recommendation/ # rule-based recommendation engine
-│ │ ├── reports/ # PDF report generation
-│ │ ├── db/ # SQLAlchemy models, session, repository
-│ │ └── utils/
-│ ├── alembic/ # database migrations
-│ ├── tests/ # verification scripts (one per phase)
-│ └── main.py
-│
-├── frontend/ # React + Vite + Tailwind
-│ └── src/
-│ ├── api/ # backend API client functions
-│ ├── components/ # ImageUpload, InspectionResults
-│ └── pages/ # Dashboard, (History — in progress)
-│
-├── models/ # trained PatchCore memory bank (gitignored)
-├── dataset/ # MVTec AD data (gitignored)
-├── reports/ # generated heatmaps, uploads, PDF reports (gitignored)
+│   ├── app/
+│   │   ├── api/
+│   │   ├── core/
+│   │   ├── preprocessing/
+│   │   ├── feature_extraction/
+│   │   ├── anomaly_detection/
+│   │   ├── severity/
+│   │   ├── recommendation/
+│   │   ├── reports/
+│   │   ├── db/
+│   │   └── utils/
+│   ├── alembic/
+│   ├── tests/
+│   └── main.py
+├── frontend/
+│   └── src/
+│       ├── api/
+│       ├── components/
+│       └── pages/
+├── models/
+├── dataset/
+├── reports/
 ├── docs/
-│ ├── architecture.md
-│ └── calibration_notes.md # severity threshold derivation + known limitations
+│   ├── architecture.md
+│   └── calibration_notes.md
 └── README.md
+```
 
+</details>
 ---
 
 ## Known Limitations
@@ -150,4 +154,3 @@ anamoly_detection/
   greedy coreset selection — a deliberate simplicity trade-off (see
   `backend/app/anomaly_detection/memory_bank.py` docstring).
 
-  
