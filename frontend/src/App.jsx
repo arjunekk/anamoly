@@ -1,9 +1,11 @@
 import { useState } from "react";
+import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import ImageUpload from "./components/ImageUpload";
 import InspectionResults from "./components/InspectionResults";
+import Dashboard from "./pages/Dashboard";
 import { inspectImage } from "./api/inspectionApi";
 
-function App() {
+function InspectionPage() {
   const [result, setResult] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -31,14 +33,35 @@ function App() {
 
       <ImageUpload onSubmit={handleSubmit} isLoading={isLoading} />
 
-      {error && (
-        <p className="mt-4 text-red-600 text-sm">
-          Error: {error}
-        </p>
-      )}
+      {error && <p className="mt-4 text-red-600 text-sm">Error: {error}</p>}
 
       <InspectionResults result={result} />
     </div>
+  );
+}
+
+function NavBar() {
+  return (
+    <nav className="bg-white border-b px-6 py-3 flex gap-6">
+      <Link to="/" className="font-medium text-gray-700 hover:text-blue-600">
+        Inspect
+      </Link>
+      <Link to="/dashboard" className="font-medium text-gray-700 hover:text-blue-600">
+        Dashboard
+      </Link>
+    </nav>
+  );
+}
+
+function App() {
+  return (
+    <BrowserRouter>
+      <NavBar />
+      <Routes>
+        <Route path="/" element={<InspectionPage />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
