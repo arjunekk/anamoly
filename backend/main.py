@@ -11,6 +11,8 @@ from app.core.config import MODEL_PATH, HEATMAP_DIR
 from app.api.model_state import load_patchcore_model
 from app.api.inspection_routes import router as inspection_router
 from app.api.history_routes import router as history_router
+from app.api.dashboard_routes import router as dashboard_router
+app.include_router(dashboard_router)
 
 
 @asynccontextmanager

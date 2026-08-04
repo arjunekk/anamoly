@@ -27,3 +27,27 @@ class InspectionHistoryItem(BaseModel):
     recommendation: str
     heatmap_url: str
     timestamp: datetime
+
+
+class CategoryStat(BaseModel):
+    count: int
+    average_score: float
+
+
+class DashboardStats(BaseModel):
+    total_inspections: int
+    defect_rate: float
+    average_anomaly_score: float
+    severity_distribution: dict[str, int]
+    category_stats: dict[str, CategoryStat]
+
+
+class TrendPoint(BaseModel):
+    timestamp: datetime
+    anomaly_score: float
+
+
+class DashboardResponse(BaseModel):
+    stats: DashboardStats
+    recent_inspections: list[InspectionHistoryItem]
+    score_trend: list[TrendPoint]
