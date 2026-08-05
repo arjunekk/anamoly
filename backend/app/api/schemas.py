@@ -51,3 +51,10 @@ class DashboardResponse(BaseModel):
     stats: DashboardStats
     recent_inspections: list[InspectionHistoryItem]
     score_trend: list[TrendPoint]
+
+class InspectionResult(BaseModel):
+    id: int
+    anomaly_score: float
+    severity: str
+    recommendations: list[str]
+    heatmap_url: str

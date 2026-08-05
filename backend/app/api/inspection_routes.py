@@ -56,8 +56,9 @@ async def inspect_image(file: UploadFile = File(...), db: Session = Depends(get_
     heatmap_path = HEATMAP_DIR / heatmap_filename
     result["heatmap_image"].save(heatmap_path)
 
+    
     # Persist this inspection to the database.
-    create_inspection(
+    saved_inspection = create_inspection(
         db=db,
         product_category="bottle",  # hardcoded for now — only one category supported so far
         image_path=str(saved_image_path),
@@ -68,6 +69,7 @@ async def inspect_image(file: UploadFile = File(...), db: Session = Depends(get_
     )
 
     return InspectionResult(
+        id=saved_inspection.id,
         anomaly_score=result["anomaly_score"],
         severity=severity.value,
         recommendations=recommendations,

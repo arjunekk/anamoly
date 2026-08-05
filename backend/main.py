@@ -13,7 +13,6 @@ from app.api.inspection_routes import router as inspection_router
 from app.api.history_routes import router as history_router
 from app.api.dashboard_routes import router as dashboard_router
 from app.api.report_routes import router as report_router
-app.include_router(report_router)
 
 
 @asynccontextmanager
@@ -38,6 +37,7 @@ app.mount("/static/heatmaps", StaticFiles(directory=str(HEATMAP_DIR)), name="hea
 app.include_router(inspection_router)
 app.include_router(history_router)
 app.include_router(dashboard_router)
+app.include_router(report_router)
 
 
 @app.get("/health")

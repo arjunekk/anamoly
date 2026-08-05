@@ -1,6 +1,6 @@
 /**
  * Displays the results of a completed inspection: heatmap, score,
- * severity, and recommendations.
+ * severity, recommendations, and a PDF report download link.
  *
  * Purely presentational — receives already-fetched data as props,
  * has no knowledge of how that data was obtained.
@@ -37,6 +37,15 @@ export default function InspectionResults({ result }) {
           {result.severity.toUpperCase()}
         </span>
       </div>
+
+      <a
+        href={`http://127.0.0.1:8000/inspections/${result.id}/report`}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="text-center px-4 py-2 bg-gray-700 text-white rounded-md hover:bg-gray-800 transition text-sm"
+      >
+        Download PDF Report
+      </a>
 
       <div className="bg-gray-50 rounded-lg p-4 border">
         <h3 className="font-semibold text-gray-700 mb-2">Recommended Actions</h3>
