@@ -23,3 +23,7 @@ python-dotenv
 
 # PDF report generation 
 reportlab
+
+# Testing (Phase 15)
+pytest
+httpx

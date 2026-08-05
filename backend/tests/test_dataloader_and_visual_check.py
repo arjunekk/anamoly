@@ -1,35 +1,36 @@
 """
-Verification script for the DataLoader and preprocessing reversibility.
-
-Purpose:
-1. Confirm the DataLoader correctly yields batches of the expected shape.
-2. Confirm preprocessing is reversible by un-normalizing a sample and
-   saving it as a viewable image, BEFORE this pipeline feeds into
-   feature extraction (Phase 5).
+Tests for DataLoader batching and preprocessing reversibility (Phase 4).
 """
 
-from pathlib import Path
+import torch
+from PIL import Image
+
 from app.preprocessing.dataloader_factory import get_train_dataloader
 from app.preprocessing.visualize import unnormalize_tensor
 
-CATEGORY_ROOT = Path("dataset/mvtec_ad/bottle")
 
-
-def main():
-    dataloader = get_train_dataloader(CATEGORY_ROOT, batch_size=16)
-
-    # Pull one batch and confirm shape
+def test_dataloader_yields_correct_batch_shape(category_root):
+    dataloader = get_train_dataloader(category_root, batch_size=16)
     batch = next(iter(dataloader))
-    print(f"Batch shape: {batch.shape}")  # expected: [16, 3, 224, 224]
-
-    # Take the first image in the batch and reverse preprocessing
-    single_tensor = batch[0]
-    restored_image = unnormalize_tensor(single_tensor)
-
-    output_path = "backend/tests/restored_sample.png"
-    restored_image.save(output_path)
-    print(f"Restored image saved to {output_path}")
+    assert batch.shape == torch.Size([16, 3, 224, 224])
 
 
-if __name__ == "__main__":
-    main()
+def test_unnormalize_produces_valid_image(category_root):
+    """
+    Confirms the un-normalize step produces a valid, viewable image —
+    not that it LOOKS correct (that still requires a human), but that
+    it's structurally valid: right type, right pixel value range.
+    """
+    dataloader = get_train_dataloader(category_root, batch_size=1)
+    batch = next(iter(dataloader))
+
+    restored = unnormalize_tensor(batch[0])
+
+    assert isinstance(restored, Image.Image)
+    assert restored.size == (224, 224)
+
+    # Every pixel value must be a valid 0-255 byte.
+    import numpy as np
+    pixel_array = np.array(restored)
+    assert pixel_array.min() >= 0
+    assert pixel_array.max() <= 255

@@ -1,27 +1,27 @@
 """
-Verification script for MVTecGoodImageDataset.
-
-Purpose: Confirm the dataset loads the correct number of images and
-that each image is transformed into a tensor of the expected shape,
-BEFORE this class is used inside the feature extraction pipeline (Phase 5).
+Tests for MVTecGoodImageDataset (Phase 3).
 """
 
-from pathlib import Path
+import torch
 from app.preprocessing.dataset_loader import MVTecGoodImageDataset
 
-CATEGORY_ROOT = Path("dataset/mvtec_ad/bottle")
+
+def test_dataset_loads_expected_number_of_images(category_root):
+    dataset = MVTecGoodImageDataset(category_root)
+    assert len(dataset) == 209
 
 
-def main():
-    dataset = MVTecGoodImageDataset(CATEGORY_ROOT)
-
-    print(f"Number of training images loaded: {len(dataset)}")
-
-    sample_tensor = dataset[0]
-    print(f"Sample tensor shape: {sample_tensor.shape}")
-    print(f"Sample tensor dtype: {sample_tensor.dtype}")
-    print(f"Sample tensor min/max: {sample_tensor.min():.3f} / {sample_tensor.max():.3f}")
+def test_sample_tensor_has_correct_shape(category_root):
+    dataset = MVTecGoodImageDataset(category_root)
+    sample = dataset[0]
+    assert sample.shape == torch.Size([3, 224, 224])
 
 
-if __name__ == "__main__":
-    main()
+def test_sample_tensor_is_normalized(category_root):
+    """
+    Confirms ImageNet normalization was actually applied — raw pixels
+    range 0-1, normalized values should extend outside that range.
+    """
+    dataset = MVTecGoodImageDataset(category_root)
+    sample = dataset[0]
+    assert sample.min() < 0 or sample.max() > 1
