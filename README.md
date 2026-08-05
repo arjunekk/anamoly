@@ -3,7 +3,8 @@
 An end-to-end AI system that simulates automated visual inspection in a
 manufacturing environment. Detects product defects, localizes them via
 anomaly heatmaps, estimates severity, generates maintenance recommendations,
-stores inspection history, and visualizes results on a dashboard.
+stores inspection history, visualizes results on a dashboard, and generates
+downloadable PDF inspection reports.
 
 Built as a modular, phase-by-phase project — currently supports the
 **bottle** category from the MVTec AD dataset.
@@ -13,10 +14,9 @@ Built as a modular, phase-by-phase project — currently supports the
 ## Tech Stack
 
 - **AI/ML:** PyTorch, Torchvision, OpenCV, WideResNet50-2 (pretrained feature extractor), PatchCore (anomaly detection)
-- **Backend:** FastAPI, SQLAlchemy, Alembic
+- **Backend:** FastAPI, SQLAlchemy, Alembic, ReportLab
 - **Frontend:** React (Vite), Tailwind CSS, React Router
 - **Database:** PostgreSQL
-- **Reports:** ReportLab (PDF generation)
 
 ---
 
@@ -27,13 +27,16 @@ Built as a modular, phase-by-phase project — currently supports the
 - Severity estimation (calibrated against real MVTec test data — see `docs/calibration_notes.md`)
 - Rule-based maintenance recommendations
 - Results persisted to PostgreSQL
-- Dashboard with aggregate statistics (defect rate, severity distribution, score trends, recent inspections)
-- Downloadable PDF inspection reports
+- **Dashboard** — aggregate statistics (defect rate, severity distribution, score trends, recent inspections)
+- **Inspection History page** — full, browsable table of every past inspection
+- **Downloadable PDF inspection reports** — generated on-demand, linked from both the Inspect and History pages
 
 🚧 In progress:
-- Dedicated Inspection History page
 - Automated testing (pytest)
 - Deployment
+- Multi-category support (currently bottle only)
+- Frontend visual polish
+- Basic security hardening (auth, upload limits, rate limiting) — not yet needed for local development, required before any public deployment
 
 ---
 
@@ -42,12 +45,18 @@ Built as a modular, phase-by-phase project — currently supports the
 This project uses the [MVTec AD dataset](https://www.mvtec.com/company/research/datasets/mvtec-ad).
 Download it separately (registration required) and place the `bottle/`
 category folder at:
-dataset/mvtec_ad/bottle/
 
+```
+dataset/mvtec_ad/bottle/
+```
+
+Expected structure:
+```
 dataset/mvtec_ad/bottle/
 ├── train/good/
 ├── test/{good, broken_large, broken_small, contamination}/
 └── ground_truth/{broken_large, broken_small, contamination}/
+```
 
 ---
 
@@ -62,8 +71,9 @@ pip install -r backend/requirements.txt
 ```
 
 Create `backend/.env`:
-
+```
 DATABASE_URL=postgresql://postgres:YOUR_PASSWORD@localhost:5432/defect_detection
+```
 
 ### 2. Database
 
@@ -78,7 +88,7 @@ alembic upgrade head
 ### 3. Build the PatchCore memory bank
 
 The trained memory bank (`models/bottle_memory_bank.pt`) must exist before
-running the API. Build it by running:
+running the API.
 
 ```bash
 PYTHONPATH=backend python backend/tests/test_patchcore.py
@@ -104,42 +114,63 @@ Runs at `http://localhost:5173`.
 
 ---
 
-## Project Structure
-<details>
-<summary><strong>📁 Project Structure</strong></summary>
+## Application Pages
 
-```text
+- **Inspect** (`/`) — upload an image, view anomaly score, severity, heatmap, recommendations, and download a PDF report
+- **Dashboard** (`/dashboard`) — aggregate stats: total inspections, defect rate, severity distribution, average score, recent inspection trend
+- **History** (`/history`) — full table of every past inspection with per-row PDF report download
+
+---
+
+## API Endpoints
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| GET | `/health` | Basic health check |
+| POST | `/inspect` | Upload an image, run full inspection pipeline |
+| GET | `/inspections` | List all past inspections |
+| GET | `/dashboard` | Aggregate statistics, recent inspections, score trend |
+| GET | `/inspections/{id}/report` | Generate and download a PDF report for one inspection |
+
+Full interactive docs available at `http://127.0.0.1:8000/docs` once the backend is running.
+
+---
+
+## Project Structure
+
+```
 anamoly_detection/
 ├── backend/
 │   ├── app/
-│   │   ├── api/
-│   │   ├── core/
-│   │   ├── preprocessing/
-│   │   ├── feature_extraction/
-│   │   ├── anomaly_detection/
-│   │   ├── severity/
-│   │   ├── recommendation/
-│   │   ├── reports/
-│   │   ├── db/
+│   │   ├── api/                 # FastAPI routes: inspection, history, dashboard, reports
+│   │   ├── core/                # config
+│   │   ├── preprocessing/       # image transforms, dataset loader, dataloader
+│   │   ├── feature_extraction/  # WideResNet50-2 wrapper
+│   │   ├── anomaly_detection/   # patch aggregation, memory bank, PatchCore, inference, heatmaps
+│   │   ├── severity/            # severity estimation (calibrated thresholds)
+│   │   ├── recommendation/      # rule-based recommendation engine
+│   │   ├── reports/             # PDF report generation (ReportLab)
+│   │   ├── db/                  # SQLAlchemy models, session, repository
 │   │   └── utils/
-│   ├── alembic/
-│   ├── tests/
+│   ├── alembic/                 # database migrations
+│   ├── tests/                   # test suite
 │   └── main.py
-├── frontend/
+│
+├── frontend/                    # React + Vite + Tailwind + React Router
 │   └── src/
-│       ├── api/
-│       ├── components/
-│       └── pages/
-├── models/
-├── dataset/
-├── reports/
+│       ├── api/                 # backend API client functions
+│       ├── components/          # ImageUpload, InspectionResults
+│       └── pages/               # Dashboard, History
+│
+├── models/                      # trained PatchCore memory bank (gitignored)
+├── dataset/                     # MVTec AD data (gitignored)
+├── reports/                     # generated heatmaps, uploads, PDF reports (gitignored)
 ├── docs/
 │   ├── architecture.md
-│   └── calibration_notes.md
+│   └── calibration_notes.md     # severity threshold derivation + known limitations
 └── README.md
 ```
 
-</details>
 ---
 
 ## Known Limitations
@@ -153,4 +184,6 @@ anamoly_detection/
 - PatchCore's memory bank uses random subsampling rather than the paper's
   greedy coreset selection — a deliberate simplicity trade-off (see
   `backend/app/anomaly_detection/memory_bank.py` docstring).
-
+- No authentication, upload size limits, or rate limiting yet — acceptable
+  for local development, required before any public deployment.
+- PDF reports are regenerated on every request rather than cached.
