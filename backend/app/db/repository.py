@@ -123,3 +123,8 @@ def get_score_trend(db: Session, limit: int = 20) -> list[dict]:
     # Reverse so the trend chart reads left-to-right, oldest to newest.
     rows.reverse()
     return [{"timestamp": ts, "anomaly_score": score} for ts, score in rows]
+
+
+def get_inspection_by_id(db: Session, inspection_id: int) -> Inspection | None:
+    """Fetches a single inspection by its ID, or None if it doesn't exist."""
+    return db.query(Inspection).filter(Inspection.id == inspection_id).first()
