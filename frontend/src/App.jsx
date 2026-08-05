@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import ImageUpload from "./components/ImageUpload";
 import InspectionResults from "./components/InspectionResults";
 import Dashboard from "./pages/Dashboard";
+import History from "./pages/History";
 import { inspectImage } from "./api/inspectionApi";
 
 function InspectionPage() {
@@ -49,6 +50,9 @@ function NavBar() {
       <Link to="/dashboard" className="font-medium text-gray-700 hover:text-blue-600">
         Dashboard
       </Link>
+      <Link to="/history" className="font-medium text-gray-700 hover:text-blue-600">
+        History
+      </Link>
     </nav>
   );
 }
@@ -60,6 +64,7 @@ function App() {
       <Routes>
         <Route path="/" element={<InspectionPage />} />
         <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/history" element={<History />} />
       </Routes>
     </BrowserRouter>
   );
