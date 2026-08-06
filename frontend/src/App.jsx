@@ -11,13 +11,13 @@ function InspectionPage() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  async function handleSubmit(file) {
+  async function handleSubmit(file, category) {
     setIsLoading(true);
     setError(null);
     setResult(null);
 
     try {
-      const data = await inspectImage(file);
+      const data = await inspectImage(file, category);
       setResult(data);
     } catch (err) {
       setError(err.message);

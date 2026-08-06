@@ -9,9 +9,17 @@
 
 const API_BASE_URL = "http://127.0.0.1:8000";
 
-export async function inspectImage(file) {
+export async function fetchCategories() {
+  const response = await fetch(`${API_BASE_URL}/categories`);
+  if (!response.ok) throw new Error("Failed to load categories");
+  const data = await response.json();
+  return data.categories;
+}
+
+export async function inspectImage(file, category) {
   const formData = new FormData();
   formData.append("file", file);
+  formData.append("category", category);
 
   const response = await fetch(`${API_BASE_URL}/inspect`, {
     method: "POST",
