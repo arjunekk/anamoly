@@ -7,7 +7,8 @@ stores inspection history, visualizes results on a dashboard, and generates
 downloadable PDF inspection reports.
 
 Built as a modular, phase-by-phase project — currently supports the
-**bottle** category from the MVTec AD dataset.
+**bottle** category from the MVTec AD dataset. Backed by a full automated
+test suite (23 tests, `pytest`).
 
 ---
 
@@ -17,6 +18,7 @@ Built as a modular, phase-by-phase project — currently supports the
 - **Backend:** FastAPI, SQLAlchemy, Alembic, ReportLab
 - **Frontend:** React (Vite), Tailwind CSS, React Router
 - **Database:** PostgreSQL
+- **Testing:** pytest, httpx (FastAPI TestClient integration tests)
 
 ---
 
@@ -30,13 +32,14 @@ Built as a modular, phase-by-phase project — currently supports the
 - **Dashboard** — aggregate statistics (defect rate, severity distribution, score trends, recent inspections)
 - **Inspection History page** — full, browsable table of every past inspection
 - **Downloadable PDF inspection reports** — generated on-demand, linked from both the Inspect and History pages
+- **Automated test suite** — 23 pytest tests covering data pipeline, feature extraction, PatchCore, severity/recommendation logic, and full API integration
 
-🚧 In progress:
-- Automated testing (pytest)
-- Deployment
+🚧 In progress / planned:
 - Multi-category support (currently bottle only)
+- Formal evaluation (AUROC, confusion matrix, precision/recall/F1, pixel-level localization accuracy against ground truth masks)
 - Frontend visual polish
 - Basic security hardening (auth, upload limits, rate limiting) — not yet needed for local development, required before any public deployment
+- Deployment
 
 ---
 
@@ -88,11 +91,9 @@ alembic upgrade head
 ### 3. Build the PatchCore memory bank
 
 The trained memory bank (`models/bottle_memory_bank.pt`) must exist before
-running the API.
-
-```bash
-PYTHONPATH=backend python backend/tests/test_patchcore.py
-```
+running the API or the test suite's slower tests. If it doesn't exist yet,
+build it by fitting PatchCore against the training DataLoader (see
+`backend/app/anomaly_detection/patchcore.py`'s `fit()` method).
 
 ### 4. Run the backend
 
@@ -111,6 +112,18 @@ npm run dev
 ```
 
 Runs at `http://localhost:5173`.
+
+### 6. Run the test suite
+
+```bash
+cd backend
+pytest -v
+```
+
+Fast pass only (skips model-loading tests):
+```bash
+pytest -v -m "not slow"
+```
 
 ---
 
@@ -136,6 +149,20 @@ Full interactive docs available at `http://127.0.0.1:8000/docs` once the backend
 
 ---
 
+## Testing
+
+23 automated tests across:
+- **Data pipeline** — dataset loading, preprocessing, normalization/reversibility
+- **Feature extraction** — WideResNet50-2 output shapes
+- **PatchCore** — the core anomaly detection hypothesis (defective images score higher than good ones), heatmap generation, a regression test locking in a known-correct score
+- **Severity & recommendations** — threshold boundaries, including a test that explicitly documents the known contamination false-negative edge case (see `docs/calibration_notes.md`)
+- **API integration** — full FastAPI request/response cycle via `TestClient`, including a rejected-file-type test
+
+Tests are marked `slow` (model-loading) and `integration` (hits the real
+database — see Known Limitations) so subsets can be run selectively.
+
+---
+
 ## Project Structure
 
 ```
@@ -153,7 +180,8 @@ anamoly_detection/
 │   │   ├── db/                  # SQLAlchemy models, session, repository
 │   │   └── utils/
 │   ├── alembic/                 # database migrations
-│   ├── tests/                   # test suite
+│   ├── tests/                   # pytest test suite (23 tests) + conftest.py fixtures
+│   ├── pytest.ini
 │   └── main.py
 │
 ├── frontend/                    # React + Vite + Tailwind + React Router
@@ -179,11 +207,20 @@ anamoly_detection/
   images). Subtle contamination defects can occasionally be misclassified
   as "no defect" — see `docs/calibration_notes.md` for details and the
   reasoning behind not "fixing" this by overfitting thresholds to one case.
+  This is also captured as an explicit test case in
+  `test_severity_and_recommendations.py`.
 - Currently supports only the `bottle` category; multi-category support
   would require per-category memory banks and recalibrated thresholds.
 - PatchCore's memory bank uses random subsampling rather than the paper's
   greedy coreset selection — a deliberate simplicity trade-off (see
   `backend/app/anomaly_detection/memory_bank.py` docstring).
+- No formal evaluation metrics computed yet (AUROC, precision/recall,
+  pixel-level localization against ground truth masks) — planned as a
+  dedicated evaluation phase.
+- Integration tests in `test_api_integration.py` run against the real
+  `defect_detection` database rather than an isolated test database —
+  acceptable for a local-development portfolio project, but a genuine
+  limitation if this were a production system.
 - No authentication, upload size limits, or rate limiting yet — acceptable
   for local development, required before any public deployment.
 - PDF reports are regenerated on every request rather than cached.
