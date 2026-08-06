@@ -24,7 +24,7 @@ def loaded_patchcore():
     model can just reuse this same instance.
     """
     if not MODEL_PATH.exists():
-        pytest.skip(f"Memory bank not found at {MODEL_PATH}. Run test_patchcore.py first.")
+        pytest.skip(f"Memory bank not found at {MODEL_PATH}. Run build_all_memory_banks.py first.")
 
     pc = PatchCore(subsample_ratio=0.1)
     pc.load(str(MODEL_PATH))
@@ -44,3 +44,20 @@ def defective_image_path():
 @pytest.fixture
 def category_root():
     return CATEGORY_ROOT
+
+
+@pytest.fixture
+def loaded_patchcore_for_category():
+    """
+    Returns a function that loads a PatchCore model for any given
+    category on demand — useful for tests that need to check behavior
+    across multiple categories, not just bottle.
+    """
+    def _load(category: str):
+        model_path = PROJECT_ROOT / "models" / f"{category}_memory_bank.pt"
+        if not model_path.exists():
+            pytest.skip(f"No memory bank for category '{category}'")
+        pc = PatchCore(subsample_ratio=0.1)
+        pc.load(str(model_path))
+        return pc
+    return _load

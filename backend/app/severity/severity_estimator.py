@@ -47,7 +47,17 @@ _ALL_THRESHOLDS = _load_thresholds()
 
 
 def get_thresholds_for_category(category: str) -> dict:
-    return _ALL_THRESHOLDS.get(category, BOTTLE_FALLBACK if category == "bottle" else BOTTLE_FALLBACK)
+    """
+    Bottle always uses the original Phase 8 manually-reviewed thresholds,
+    regardless of what the automated calibration script may have computed
+    for it — those numbers were specifically discussed and documented,
+    and shouldn't be silently overwritten by a later calibration run.
+    Every other category uses its automated calibration if available,
+    falling back to bottle's thresholds if that category has no entry.
+    """
+    if category == "bottle":
+        return BOTTLE_FALLBACK
+    return _ALL_THRESHOLDS.get(category, BOTTLE_FALLBACK)
 
 
 def estimate_severity(anomaly_score: float, category: str = "bottle") -> Severity:

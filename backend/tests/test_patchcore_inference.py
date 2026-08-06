@@ -41,4 +41,7 @@ def test_known_defective_image_score_is_stable(loaded_patchcore, defective_image
     or something in the pipeline broke — worth investigating either way.
     """
     result = run_inference(defective_image_path, loaded_patchcore)
-    assert result["anomaly_score"] == pytest.approx(45.7088, abs=0.01)
+    # Updated after the memory bank was rebuilt during multi-category
+    # support (Phase 16) — random subsampling means a rebuild legitimately
+    # changes this value. Original Phase 6 value was 45.7088.
+    assert result["anomaly_score"] == pytest.approx(44.8894, abs=0.01)
