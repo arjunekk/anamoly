@@ -1,0 +1,227 @@
+{
+  "bottle": {
+    "image_level": {
+      "auroc": 0.9952380952380951,
+      "precision": 0.9393939393939394,
+      "recall": 0.9841269841269841,
+      "f1": 0.9612403100775194,
+      "true_negatives": 16,
+      "false_positives": 4,
+      "false_negatives": 1,
+      "true_positives": 62
+    },
+    "pixel_level_auroc_mean": 0.9866490654194198,
+    "pixel_level_auroc_count": 63,
+    "num_test_images": 83
+  },
+  "cable": {
+    "image_level": {
+      "auroc": 0.8521364317841078,
+      "precision": 1.0,
+      "recall": 0.20652173913043478,
+      "f1": 0.34234234234234234,
+      "true_negatives": 58,
+      "false_positives": 0,
+      "false_negatives": 73,
+      "true_positives": 19
+    },
+    "pixel_level_auroc_mean": 0.9596452211963952,
+    "pixel_level_auroc_count": 92,
+    "num_test_images": 150
+  },
+  "capsule": {
+    "image_level": {
+      "auroc": 0.8001595532508975,
+      "precision": 0.5,
+      "recall": 0.009174311926605505,
+      "f1": 0.018018018018018018,
+      "true_negatives": 22,
+      "false_positives": 1,
+      "false_negatives": 108,
+      "true_positives": 1
+    },
+    "pixel_level_auroc_mean": 0.981632645791264,
+    "pixel_level_auroc_count": 109,
+    "num_test_images": 132
+  },
+  "carpet": {
+    "image_level": {
+      "auroc": 0.9839486356340289,
+      "precision": 0.9880952380952381,
+      "recall": 0.9325842696629213,
+      "f1": 0.9595375722543352,
+      "true_negatives": 27,
+      "false_positives": 1,
+      "false_negatives": 6,
+      "true_positives": 83
+    },
+    "pixel_level_auroc_mean": 0.9888560227024954,
+    "pixel_level_auroc_count": 89,
+    "num_test_images": 117
+  },
+  "grid": {
+    "image_level": {
+      "auroc": 0.8245614035087719,
+      "precision": 0.9473684210526315,
+      "recall": 0.3157894736842105,
+      "f1": 0.47368421052631576,
+      "true_negatives": 20,
+      "false_positives": 1,
+      "false_negatives": 39,
+      "true_positives": 18
+    },
+    "pixel_level_auroc_mean": 0.9692670019497953,
+    "pixel_level_auroc_count": 57,
+    "num_test_images": 78
+  },
+  "hazelnut": {
+    "image_level": {
+      "auroc": 0.9974999999999999,
+      "precision": 1.0,
+      "recall": 0.9142857142857143,
+      "f1": 0.9552238805970149,
+      "true_negatives": 40,
+      "false_positives": 0,
+      "false_negatives": 6,
+      "true_positives": 64
+    },
+    "pixel_level_auroc_mean": 0.9876255136333901,
+    "pixel_level_auroc_count": 70,
+    "num_test_images": 110
+  },
+  "leather": {
+    "image_level": {
+      "auroc": 1.0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "true_negatives": 32,
+      "false_positives": 0,
+      "false_negatives": 0,
+      "true_positives": 92
+    },
+    "pixel_level_auroc_mean": 0.9962154780813123,
+    "pixel_level_auroc_count": 92,
+    "num_test_images": 124
+  },
+  "metal_nut": {
+    "image_level": {
+      "auroc": 0.9916911045943304,
+      "precision": 0.9888888888888889,
+      "recall": 0.956989247311828,
+      "f1": 0.9726775956284153,
+      "true_negatives": 21,
+      "false_positives": 1,
+      "false_negatives": 4,
+      "true_positives": 89
+    },
+    "pixel_level_auroc_mean": 0.9715819104196977,
+    "pixel_level_auroc_count": 93,
+    "num_test_images": 115
+  },
+  "pill": {
+    "image_level": {
+      "auroc": 0.8617021276595744,
+      "precision": 0.9838709677419355,
+      "recall": 0.4326241134751773,
+      "f1": 0.6009852216748769,
+      "true_negatives": 25,
+      "false_positives": 1,
+      "false_negatives": 80,
+      "true_positives": 61
+    },
+    "pixel_level_auroc_mean": 0.9631113114157126,
+    "pixel_level_auroc_count": 141,
+    "num_test_images": 167
+  },
+  "screw": {
+    "image_level": {
+      "auroc": 0.8321377331420374,
+      "precision": 0.8571428571428571,
+      "recall": 0.05042016806722689,
+      "f1": 0.09523809523809523,
+      "true_negatives": 40,
+      "false_positives": 1,
+      "false_negatives": 113,
+      "true_positives": 6
+    },
+    "pixel_level_auroc_mean": 0.9826931250969434,
+    "pixel_level_auroc_count": 119,
+    "num_test_images": 160
+  },
+  "tile": {
+    "image_level": {
+      "auroc": 0.9227994227994227,
+      "precision": 0.9791666666666666,
+      "recall": 0.5595238095238095,
+      "f1": 0.7121212121212122,
+      "true_negatives": 32,
+      "false_positives": 1,
+      "false_negatives": 37,
+      "true_positives": 47
+    },
+    "pixel_level_auroc_mean": 0.9491258915917475,
+    "pixel_level_auroc_count": 84,
+    "num_test_images": 117
+  },
+  "toothbrush": {
+    "image_level": {
+      "auroc": 0.8305555555555556,
+      "precision": 0.9090909090909091,
+      "recall": 0.3333333333333333,
+      "f1": 0.4878048780487805,
+      "true_negatives": 11,
+      "false_positives": 1,
+      "false_negatives": 20,
+      "true_positives": 10
+    },
+    "pixel_level_auroc_mean": 0.9802475242351804,
+    "pixel_level_auroc_count": 30,
+    "num_test_images": 42
+  },
+  "transistor": {
+    "image_level": {
+      "auroc": 0.9075000000000001,
+      "precision": 0.9166666666666666,
+      "recall": 0.275,
+      "f1": 0.4230769230769231,
+      "true_negatives": 59,
+      "false_positives": 1,
+      "false_negatives": 29,
+      "true_positives": 11
+    },
+    "pixel_level_auroc_mean": 0.902570252640342,
+    "pixel_level_auroc_count": 40,
+    "num_test_images": 100
+  },
+  "wood": {
+    "image_level": {
+      "auroc": 0.9850877192982457,
+      "precision": 0.9818181818181818,
+      "recall": 0.9,
+      "f1": 0.9391304347826087,
+      "true_negatives": 18,
+      "false_positives": 1,
+      "false_negatives": 6,
+      "true_positives": 54
+    },
+    "pixel_level_auroc_mean": 0.9584466980618668,
+    "pixel_level_auroc_count": 60,
+    "num_test_images": 79
+  },
+  "zipper": {
+    "image_level": {
+      "auroc": 0.9206932773109244,
+      "precision": 1.0,
+      "recall": 0.33613445378151263,
+      "f1": 0.5031446540880503,
+      "true_negatives": 32,
+      "false_positives": 0,
+      "false_negatives": 79,
+      "true_positives": 40
+    },
+    "pixel_level_auroc_mean": 0.9787408960727357,
+    "pixel_level_auroc_count": 119,
+    "num_test_images": 151
+  }
+}
