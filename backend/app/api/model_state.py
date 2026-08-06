@@ -1,30 +1,54 @@
 """
-Manages the single, shared PatchCore model instance for the running server.
+Manages PatchCore model instances for every available category.
 
-Purpose: the memory bank must be loaded from disk exactly once, when the
-server starts — not on every request. This module provides a simple
-get/set interface so main.py can load the model at startup, and routes
-can retrieve that same instance without reloading it.
+Each category has its own memory bank (bottle's "normal" looks nothing
+like cable's "normal"), so this holds a dict keyed by category name,
+all loaded once at server startup — not a single shared instance
+like before multi-category support.
 """
 
+from pathlib import Path
 from app.anomaly_detection.patchcore import PatchCore
+from app.core.categories import get_available_categories
+from app.core.config import PROJECT_ROOT
 
-_patchcore_instance: PatchCore | None = None
+MODELS_DIR = PROJECT_ROOT / "models"
 
-
-def load_patchcore_model(model_path: str):
-    """Loads the PatchCore model once and stores it for reuse. Called at server startup."""
-    global _patchcore_instance
-    _patchcore_instance = PatchCore(subsample_ratio=0.1)
-    _patchcore_instance.load(model_path)
-    print("PatchCore model loaded and ready.")
+_patchcore_models: dict[str, PatchCore] = {}
 
 
-def get_patchcore_model() -> PatchCore:
-    """Retrieves the already-loaded PatchCore instance. Raises if called before startup loading."""
-    if _patchcore_instance is None:
-        raise RuntimeError(
-            "PatchCore model has not been loaded yet. "
-            "Ensure load_patchcore_model() is called during server startup."
+def load_all_patchcore_models():
+    """
+    Loads every available category's memory bank once, at server startup.
+    Categories without a built memory bank yet are skipped with a warning,
+    not a crash — lets the system run with a partial set of categories
+    while others are still being downloaded/built.
+    """
+    categories = get_available_categories()
+
+    for category in categories:
+        model_path = MODELS_DIR / f"{category}_memory_bank.pt"
+        if not model_path.exists():
+            print(f"WARNING: no memory bank found for '{category}', skipping.")
+            continue
+
+        pc = PatchCore(subsample_ratio=0.1)
+        pc.load(str(model_path))
+        _patchcore_models[category] = pc
+        print(f"Loaded model for category: {category}")
+
+    print(f"PatchCore models ready for {len(_patchcore_models)} categories.")
+
+
+def get_patchcore_model(category: str) -> PatchCore:
+    if category not in _patchcore_models:
+        raise ValueError(
+            f"No model loaded for category '{category}'. "
+            f"Available categories: {list(_patchcore_models.keys())}"
         )
-    return _patchcore_instance
+    return _patchcore_models[category]
+
+
+def get_loaded_categories() -> list[str]:
+    """Used by the frontend to populate the category dropdown."""
+    return list(_patchcore_models.keys())
