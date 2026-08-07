@@ -9,16 +9,16 @@ Computed across all available MVTec AD categories. Image-level metrics compare t
 |---|---|---|---|---|---|---|
 | bottle | 0.995 | 0.939 | 0.984 | 0.961 | 0.987 | 83 |
 | cable | 0.852 | 0.943 | 0.543 | 0.690 | 0.960 | 150 |
-| capsule | 0.800 | 0.917 | 0.202 | 0.331 | 0.982 | 132 |
+| capsule | 0.925 | 0.972 | 0.642 | 0.773 | 0.983 | 132 |
 | carpet | 0.984 | 0.976 | 0.933 | 0.954 | 0.989 | 117 |
-| grid | 0.825 | 0.969 | 0.544 | 0.697 | 0.969 | 78 |
+| grid | 0.757 | 0.923 | 0.421 | 0.578 | 0.977 | 78 |
 | hazelnut | 0.997 | 0.972 | 1.000 | 0.986 | 0.988 | 110 |
 | leather | 1.000 | 0.979 | 1.000 | 0.989 | 0.996 | 124 |
 | metal_nut | 0.992 | 0.979 | 0.989 | 0.984 | 0.972 | 115 |
 | pill | 0.862 | 0.976 | 0.574 | 0.723 | 0.963 | 167 |
-| screw | 0.832 | 0.971 | 0.563 | 0.713 | 0.983 | 160 |
+| screw | 0.886 | 0.948 | 0.462 | 0.621 | 0.985 | 160 |
 | tile | 0.923 | 0.968 | 0.714 | 0.822 | 0.949 | 117 |
-| toothbrush | 0.831 | 0.909 | 0.333 | 0.488 | 0.980 | 42 |
+| toothbrush | 0.839 | 0.917 | 0.367 | 0.524 | 0.984 | 42 |
 | transistor | 0.908 | 0.870 | 0.500 | 0.635 | 0.903 | 100 |
 | wood | 0.985 | 0.983 | 0.967 | 0.975 | 0.958 | 79 |
 | zipper | 0.921 | 0.964 | 0.445 | 0.609 | 0.979 | 151 |
@@ -45,7 +45,7 @@ Computed across all available MVTec AD categories. Image-level metrics compare t
 | | Predicted: No Defect | Predicted: Defect |
 |---|---|---|
 | **Actual: Good** | 21 (TN) | 2 (FP) |
-| **Actual: Defective** | 87 (FN) | 22 (TP) |
+| **Actual: Defective** | 39 (FN) | 70 (TP) |
 
 ### carpet
 
@@ -58,8 +58,8 @@ Computed across all available MVTec AD categories. Image-level metrics compare t
 
 | | Predicted: No Defect | Predicted: Defect |
 |---|---|---|
-| **Actual: Good** | 20 (TN) | 1 (FP) |
-| **Actual: Defective** | 26 (FN) | 31 (TP) |
+| **Actual: Good** | 19 (TN) | 2 (FP) |
+| **Actual: Defective** | 33 (FN) | 24 (TP) |
 
 ### hazelnut
 
@@ -93,8 +93,8 @@ Computed across all available MVTec AD categories. Image-level metrics compare t
 
 | | Predicted: No Defect | Predicted: Defect |
 |---|---|---|
-| **Actual: Good** | 39 (TN) | 2 (FP) |
-| **Actual: Defective** | 52 (FN) | 67 (TP) |
+| **Actual: Good** | 38 (TN) | 3 (FP) |
+| **Actual: Defective** | 64 (FN) | 55 (TP) |
 
 ### tile
 
@@ -108,7 +108,7 @@ Computed across all available MVTec AD categories. Image-level metrics compare t
 | | Predicted: No Defect | Predicted: Defect |
 |---|---|---|
 | **Actual: Good** | 11 (TN) | 1 (FP) |
-| **Actual: Defective** | 20 (FN) | 10 (TP) |
+| **Actual: Defective** | 19 (FN) | 11 (TP) |
 
 ### transistor
 
@@ -130,3 +130,31 @@ Computed across all available MVTec AD categories. Image-level metrics compare t
 |---|---|---|
 | **Actual: Good** | 30 (TN) | 2 (FP) |
 | **Actual: Defective** | 66 (FN) | 53 (TP) |
+
+## Memory Bank Subsample Ratio Experiment
+
+Capsule, toothbrush, screw, and grid initially underperformed relative to
+other categories after threshold recalibration (see project history).
+As a follow-up experiment, these four categories' memory banks were
+rebuilt with a richer subsample ratio (0.25 vs the default 0.1) to test
+whether a larger reference set of "normal" patch features would improve
+detection.
+
+**Results were mixed, not uniformly positive:**
+
+- **Capsule**: clear improvement (AUROC 0.800→0.925, recall 0.202→0.642)
+- **Toothbrush**: roughly neutral (AUROC 0.831→0.839, recall 0.333→0.367)
+- **Screw**: AUROC improved (0.832→0.886) but recall *decreased*
+  (0.563→0.462) after threshold recalibration on the new score distribution
+- **Grid**: both AUROC and recall decreased (0.825→0.757, 0.544→0.421) —
+  a genuine regression, plausibly because grid's highly repetitive,
+  self-similar texture means a larger memory bank captures more
+  "acceptable normal variation," making subtle distortions harder to
+  distinguish from that broader normal range
+
+**Decision:** all four categories were kept at the 0.25 ratio despite
+grid and screw's regression, prioritizing capsule's substantial gain.
+This is a deliberate trade-off, not an oversight — it illustrates that
+"more reference data" is not a universal improvement for every product
+category, and that per-category tuning has real, category-specific
+trade-offs rather than one setting that's globally optimal.
