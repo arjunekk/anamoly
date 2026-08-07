@@ -7,7 +7,6 @@ bottle in Phase 8).
 Outputs:
   - backend/app/core/severity_thresholds.json  (used by severity_estimator.py)
   - docs/calibration_notes_all_categories.md   (human-readable report)
-"""
 
 import json
 import numpy as np
@@ -66,7 +65,7 @@ def calibrate_category(category: str) -> dict:
         print(f"Skipping {category}: missing good or defective test scores")
         return None
 
-    none_ceiling = max(good_scores)
+    none_ceiling = float(np.percentile(good_scores, 95))
     minor_ceiling = float(np.percentile(defective_scores, 33))
     moderate_ceiling = float(np.percentile(defective_scores, 66))
 
