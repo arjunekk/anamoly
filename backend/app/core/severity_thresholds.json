@@ -10,9 +10,9 @@
     "moderate_ceiling": 45.42
   },
   "capsule": {
-    "none_ceiling": 40.87,
-    "minor_ceiling": 40.88,
-    "moderate_ceiling": 40.89
+    "none_ceiling": 32.23,
+    "minor_ceiling": 32.24,
+    "moderate_ceiling": 37.39
   },
   "carpet": {
     "none_ceiling": 29.42,
@@ -20,9 +20,9 @@
     "moderate_ceiling": 44.26
   },
   "grid": {
-    "none_ceiling": 39.16,
-    "minor_ceiling": 39.17,
-    "moderate_ceiling": 41.61
+    "none_ceiling": 38.6,
+    "minor_ceiling": 38.61,
+    "moderate_ceiling": 39.79
   },
   "hazelnut": {
     "none_ceiling": 38.77,
@@ -45,9 +45,9 @@
     "moderate_ceiling": 37.85
   },
   "screw": {
-    "none_ceiling": 35.1,
-    "minor_ceiling": 35.11,
-    "moderate_ceiling": 37.28
+    "none_ceiling": 34.43,
+    "minor_ceiling": 34.44,
+    "moderate_ceiling": 36.3
   },
   "tile": {
     "none_ceiling": 36.51,
@@ -55,9 +55,9 @@
     "moderate_ceiling": 42.88
   },
   "toothbrush": {
-    "none_ceiling": 48.45,
-    "minor_ceiling": 48.46,
-    "moderate_ceiling": 48.47
+    "none_ceiling": 47.55,
+    "minor_ceiling": 47.56,
+    "moderate_ceiling": 48.25
   },
   "transistor": {
     "none_ceiling": 42.84,

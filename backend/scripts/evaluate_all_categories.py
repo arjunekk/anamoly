@@ -133,10 +133,17 @@ def write_markdown_report(all_results: dict):
 
 
 def main():
-    categories = get_available_categories()
+    import sys
+    categories = sys.argv[1:] if len(sys.argv) > 1 else get_available_categories()
     print(f"Evaluating {len(categories)} categories")
 
+    # Load existing results first, so categories NOT being re-evaluated
+    # keep their current entries instead of being dropped from the report.
     all_results = {}
+    if REPORT_JSON_PATH.exists():
+        with open(REPORT_JSON_PATH) as f:
+            all_results = json.load(f)
+
     for category in categories:
         all_results[category] = evaluate_category(category)
 

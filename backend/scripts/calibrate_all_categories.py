@@ -128,11 +128,18 @@ def write_report(all_results: dict):
 
 
 def main():
-    categories = get_available_categories()
+    import sys
+    categories = sys.argv[1:] if len(sys.argv) > 1 else get_available_categories()
     print(f"Calibrating {len(categories)} categories: {categories}")
 
     all_results = {}
     thresholds_json = {}
+
+    # Load existing thresholds first, so categories NOT being recalibrated
+    # keep their current values instead of being dropped from the file.
+    if THRESHOLDS_PATH.exists():
+        with open(THRESHOLDS_PATH) as f:
+            thresholds_json = json.load(f)
 
     for category in categories:
         result = calibrate_category(category)
