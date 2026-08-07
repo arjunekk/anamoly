@@ -8,20 +8,20 @@ Computed across all available MVTec AD categories. Image-level metrics compare t
 | Category | Image AUROC | Precision | Recall | F1 | Pixel AUROC (mean) | Test Images |
 |---|---|---|---|---|---|---|
 | bottle | 0.995 | 0.939 | 0.984 | 0.961 | 0.987 | 83 |
-| cable | 0.852 | 1.000 | 0.207 | 0.342 | 0.960 | 150 |
-| capsule | 0.800 | 0.500 | 0.009 | 0.018 | 0.982 | 132 |
-| carpet | 0.984 | 0.988 | 0.933 | 0.960 | 0.989 | 117 |
-| grid | 0.825 | 0.947 | 0.316 | 0.474 | 0.969 | 78 |
-| hazelnut | 0.997 | 1.000 | 0.914 | 0.955 | 0.988 | 110 |
-| leather | 1.000 | 1.000 | 1.000 | 1.000 | 0.996 | 124 |
-| metal_nut | 0.992 | 0.989 | 0.957 | 0.973 | 0.972 | 115 |
-| pill | 0.862 | 0.984 | 0.433 | 0.601 | 0.963 | 167 |
-| screw | 0.832 | 0.857 | 0.050 | 0.095 | 0.983 | 160 |
-| tile | 0.923 | 0.979 | 0.560 | 0.712 | 0.949 | 117 |
+| cable | 0.852 | 0.943 | 0.543 | 0.690 | 0.960 | 150 |
+| capsule | 0.800 | 0.917 | 0.202 | 0.331 | 0.982 | 132 |
+| carpet | 0.984 | 0.976 | 0.933 | 0.954 | 0.989 | 117 |
+| grid | 0.825 | 0.969 | 0.544 | 0.697 | 0.969 | 78 |
+| hazelnut | 0.997 | 0.972 | 1.000 | 0.986 | 0.988 | 110 |
+| leather | 1.000 | 0.979 | 1.000 | 0.989 | 0.996 | 124 |
+| metal_nut | 0.992 | 0.979 | 0.989 | 0.984 | 0.972 | 115 |
+| pill | 0.862 | 0.976 | 0.574 | 0.723 | 0.963 | 167 |
+| screw | 0.832 | 0.971 | 0.563 | 0.713 | 0.983 | 160 |
+| tile | 0.923 | 0.968 | 0.714 | 0.822 | 0.949 | 117 |
 | toothbrush | 0.831 | 0.909 | 0.333 | 0.488 | 0.980 | 42 |
-| transistor | 0.908 | 0.917 | 0.275 | 0.423 | 0.903 | 100 |
-| wood | 0.985 | 0.982 | 0.900 | 0.939 | 0.958 | 79 |
-| zipper | 0.921 | 1.000 | 0.336 | 0.503 | 0.979 | 151 |
+| transistor | 0.908 | 0.870 | 0.500 | 0.635 | 0.903 | 100 |
+| wood | 0.985 | 0.983 | 0.967 | 0.975 | 0.958 | 79 |
+| zipper | 0.921 | 0.964 | 0.445 | 0.609 | 0.979 | 151 |
 
 ## Confusion Matrices
 
@@ -37,21 +37,21 @@ Computed across all available MVTec AD categories. Image-level metrics compare t
 
 | | Predicted: No Defect | Predicted: Defect |
 |---|---|---|
-| **Actual: Good** | 58 (TN) | 0 (FP) |
-| **Actual: Defective** | 73 (FN) | 19 (TP) |
+| **Actual: Good** | 55 (TN) | 3 (FP) |
+| **Actual: Defective** | 42 (FN) | 50 (TP) |
 
 ### capsule
 
 | | Predicted: No Defect | Predicted: Defect |
 |---|---|---|
-| **Actual: Good** | 22 (TN) | 1 (FP) |
-| **Actual: Defective** | 108 (FN) | 1 (TP) |
+| **Actual: Good** | 21 (TN) | 2 (FP) |
+| **Actual: Defective** | 87 (FN) | 22 (TP) |
 
 ### carpet
 
 | | Predicted: No Defect | Predicted: Defect |
 |---|---|---|
-| **Actual: Good** | 27 (TN) | 1 (FP) |
+| **Actual: Good** | 26 (TN) | 2 (FP) |
 | **Actual: Defective** | 6 (FN) | 83 (TP) |
 
 ### grid
@@ -59,49 +59,49 @@ Computed across all available MVTec AD categories. Image-level metrics compare t
 | | Predicted: No Defect | Predicted: Defect |
 |---|---|---|
 | **Actual: Good** | 20 (TN) | 1 (FP) |
-| **Actual: Defective** | 39 (FN) | 18 (TP) |
+| **Actual: Defective** | 26 (FN) | 31 (TP) |
 
 ### hazelnut
 
 | | Predicted: No Defect | Predicted: Defect |
 |---|---|---|
-| **Actual: Good** | 40 (TN) | 0 (FP) |
-| **Actual: Defective** | 6 (FN) | 64 (TP) |
+| **Actual: Good** | 38 (TN) | 2 (FP) |
+| **Actual: Defective** | 0 (FN) | 70 (TP) |
 
 ### leather
 
 | | Predicted: No Defect | Predicted: Defect |
 |---|---|---|
-| **Actual: Good** | 32 (TN) | 0 (FP) |
+| **Actual: Good** | 30 (TN) | 2 (FP) |
 | **Actual: Defective** | 0 (FN) | 92 (TP) |
 
 ### metal_nut
 
 | | Predicted: No Defect | Predicted: Defect |
 |---|---|---|
-| **Actual: Good** | 21 (TN) | 1 (FP) |
-| **Actual: Defective** | 4 (FN) | 89 (TP) |
+| **Actual: Good** | 20 (TN) | 2 (FP) |
+| **Actual: Defective** | 1 (FN) | 92 (TP) |
 
 ### pill
 
 | | Predicted: No Defect | Predicted: Defect |
 |---|---|---|
-| **Actual: Good** | 25 (TN) | 1 (FP) |
-| **Actual: Defective** | 80 (FN) | 61 (TP) |
+| **Actual: Good** | 24 (TN) | 2 (FP) |
+| **Actual: Defective** | 60 (FN) | 81 (TP) |
 
 ### screw
 
 | | Predicted: No Defect | Predicted: Defect |
 |---|---|---|
-| **Actual: Good** | 40 (TN) | 1 (FP) |
-| **Actual: Defective** | 113 (FN) | 6 (TP) |
+| **Actual: Good** | 39 (TN) | 2 (FP) |
+| **Actual: Defective** | 52 (FN) | 67 (TP) |
 
 ### tile
 
 | | Predicted: No Defect | Predicted: Defect |
 |---|---|---|
-| **Actual: Good** | 32 (TN) | 1 (FP) |
-| **Actual: Defective** | 37 (FN) | 47 (TP) |
+| **Actual: Good** | 31 (TN) | 2 (FP) |
+| **Actual: Defective** | 24 (FN) | 60 (TP) |
 
 ### toothbrush
 
@@ -114,19 +114,19 @@ Computed across all available MVTec AD categories. Image-level metrics compare t
 
 | | Predicted: No Defect | Predicted: Defect |
 |---|---|---|
-| **Actual: Good** | 59 (TN) | 1 (FP) |
-| **Actual: Defective** | 29 (FN) | 11 (TP) |
+| **Actual: Good** | 57 (TN) | 3 (FP) |
+| **Actual: Defective** | 20 (FN) | 20 (TP) |
 
 ### wood
 
 | | Predicted: No Defect | Predicted: Defect |
 |---|---|---|
 | **Actual: Good** | 18 (TN) | 1 (FP) |
-| **Actual: Defective** | 6 (FN) | 54 (TP) |
+| **Actual: Defective** | 2 (FN) | 58 (TP) |
 
 ### zipper
 
 | | Predicted: No Defect | Predicted: Defect |
 |---|---|---|
-| **Actual: Good** | 32 (TN) | 0 (FP) |
-| **Actual: Defective** | 79 (FN) | 40 (TP) |
+| **Actual: Good** | 30 (TN) | 2 (FP) |
+| **Actual: Defective** | 66 (FN) | 53 (TP) |

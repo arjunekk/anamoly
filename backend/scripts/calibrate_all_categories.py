@@ -7,6 +7,7 @@ bottle in Phase 8).
 Outputs:
   - backend/app/core/severity_thresholds.json  (used by severity_estimator.py)
   - docs/calibration_notes_all_categories.md   (human-readable report)
+"""
 
 import json
 import numpy as np

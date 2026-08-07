@@ -12,7 +12,7 @@ Thresholds derived automatically via percentile-based splitting of defective tes
 | contamination | 21 | 29.51 | 61.81 | 42.17 |
 | good | 20 | 22.69 | 33.26 | 28.48 |
 
-**Thresholds:** None ≤ 33.26 | Minor ≤ 41.48 | Moderate ≤ 44.87 | Critical above
+**Thresholds:** None ≤ 32.9 | Minor ≤ 41.48 | Moderate ≤ 44.87 | Critical above
 
 
 ## cable
@@ -29,7 +29,7 @@ Thresholds derived automatically via percentile-based splitting of defective tes
 | missing_wire | 10 | 40.31 | 51.03 | 45.11 |
 | poke_insulation | 10 | 37.33 | 44.93 | 40.78 |
 
-**Thresholds:** None ≤ 47.95 | Minor ≤ 47.96 | Moderate ≤ 47.97 | Critical above
+**Thresholds:** None ≤ 42.28 | Minor ≤ 42.29 | Moderate ≤ 45.42 | Critical above
 
 
 ## capsule
@@ -43,7 +43,7 @@ Thresholds derived automatically via percentile-based splitting of defective tes
 | scratch | 23 | 25.43 | 39.66 | 31.29 |
 | squeeze | 20 | 31.79 | 44.73 | 40.12 |
 
-**Thresholds:** None ≤ 49.74 | Minor ≤ 49.75 | Moderate ≤ 49.76 | Critical above
+**Thresholds:** None ≤ 40.87 | Minor ≤ 40.88 | Moderate ≤ 40.89 | Critical above
 
 
 ## carpet
@@ -57,7 +57,7 @@ Thresholds derived automatically via percentile-based splitting of defective tes
 | metal_contamination | 17 | 28.62 | 53.79 | 45.44 |
 | thread | 19 | 24.88 | 49.22 | 40.42 |
 
-**Thresholds:** None ≤ 30.23 | Minor ≤ 38.79 | Moderate ≤ 44.26 | Critical above
+**Thresholds:** None ≤ 29.42 | Minor ≤ 38.79 | Moderate ≤ 44.26 | Critical above
 
 
 ## grid
@@ -71,7 +71,7 @@ Thresholds derived automatically via percentile-based splitting of defective tes
 | metal_contamination | 11 | 37.05 | 49.5 | 42.16 |
 | thread | 11 | 32.73 | 46.53 | 38.53 |
 
-**Thresholds:** None ≤ 42.03 | Minor ≤ 42.04 | Moderate ≤ 42.05 | Critical above
+**Thresholds:** None ≤ 39.16 | Minor ≤ 39.17 | Moderate ≤ 41.61 | Critical above
 
 
 ## hazelnut
@@ -84,7 +84,7 @@ Thresholds derived automatically via percentile-based splitting of defective tes
 | hole | 18 | 41.23 | 60.0 | 48.73 |
 | print | 17 | 40.86 | 53.75 | 45.72 |
 
-**Thresholds:** None ≤ 41.96 | Minor ≤ 44.29 | Moderate ≤ 47.4 | Critical above
+**Thresholds:** None ≤ 38.77 | Minor ≤ 44.29 | Moderate ≤ 47.4 | Critical above
 
 
 ## leather
@@ -98,7 +98,7 @@ Thresholds derived automatically via percentile-based splitting of defective tes
 | good | 32 | 22.96 | 31.62 | 25.89 |
 | poke | 18 | 38.43 | 54.28 | 47.88 |
 
-**Thresholds:** None ≤ 31.62 | Minor ≤ 44.51 | Moderate ≤ 50.25 | Critical above
+**Thresholds:** None ≤ 29.0 | Minor ≤ 44.51 | Moderate ≤ 50.25 | Critical above
 
 
 ## metal_nut
@@ -111,7 +111,7 @@ Thresholds derived automatically via percentile-based splitting of defective tes
 | good | 22 | 29.59 | 36.18 | 32.19 |
 | scratch | 23 | 31.74 | 44.59 | 39.44 |
 
-**Thresholds:** None ≤ 36.18 | Minor ≤ 41.01 | Moderate ≤ 44.54 | Critical above
+**Thresholds:** None ≤ 34.57 | Minor ≤ 41.01 | Moderate ≤ 44.54 | Critical above
 
 
 ## pill
@@ -127,7 +127,7 @@ Thresholds derived automatically via percentile-based splitting of defective tes
 | pill_type | 9 | 34.42 | 47.95 | 40.62 |
 | scratch | 24 | 30.56 | 40.81 | 35.5 |
 
-**Thresholds:** None ≤ 36.48 | Minor ≤ 36.49 | Moderate ≤ 37.85 | Critical above
+**Thresholds:** None ≤ 35.05 | Minor ≤ 35.06 | Moderate ≤ 37.85 | Critical above
 
 
 ## screw
@@ -141,7 +141,7 @@ Thresholds derived automatically via percentile-based splitting of defective tes
 | thread_side | 23 | 30.02 | 39.2 | 33.05 |
 | thread_top | 23 | 30.32 | 42.1 | 34.48 |
 
-**Thresholds:** None ≤ 43.07 | Minor ≤ 43.08 | Moderate ≤ 43.09 | Critical above
+**Thresholds:** None ≤ 35.1 | Minor ≤ 35.11 | Moderate ≤ 37.28 | Critical above
 
 
 ## tile
@@ -155,7 +155,7 @@ Thresholds derived automatically via percentile-based splitting of defective tes
 | oil | 18 | 36.25 | 51.13 | 41.41 |
 | rough | 15 | 31.48 | 47.32 | 36.84 |
 
-**Thresholds:** None ≤ 39.81 | Minor ≤ 39.82 | Moderate ≤ 42.88 | Critical above
+**Thresholds:** None ≤ 36.51 | Minor ≤ 38.07 | Moderate ≤ 42.88 | Critical above
 
 
 ## toothbrush
@@ -165,7 +165,7 @@ Thresholds derived automatically via percentile-based splitting of defective tes
 | defective | 30 | 32.55 | 54.38 | 45.37 |
 | good | 12 | 31.58 | 49.07 | 36.52 |
 
-**Thresholds:** None ≤ 49.07 | Minor ≤ 49.08 | Moderate ≤ 49.09 | Critical above
+**Thresholds:** None ≤ 48.45 | Minor ≤ 48.46 | Moderate ≤ 48.47 | Critical above
 
 
 ## transistor
@@ -178,7 +178,7 @@ Thresholds derived automatically via percentile-based splitting of defective tes
 | good | 60 | 31.65 | 46.39 | 36.78 |
 | misplaced | 10 | 35.66 | 50.62 | 43.83 |
 
-**Thresholds:** None ≤ 46.39 | Minor ≤ 46.4 | Moderate ≤ 46.41 | Critical above
+**Thresholds:** None ≤ 42.84 | Minor ≤ 42.85 | Moderate ≤ 45.59 | Critical above
 
 
 ## wood
@@ -192,7 +192,7 @@ Thresholds derived automatically via percentile-based splitting of defective tes
 | liquid | 10 | 35.72 | 52.51 | 44.57 |
 | scratch | 21 | 28.1 | 51.01 | 41.55 |
 
-**Thresholds:** None ≤ 36.0 | Minor ≤ 43.77 | Moderate ≤ 49.19 | Critical above
+**Thresholds:** None ≤ 34.88 | Minor ≤ 43.77 | Moderate ≤ 49.19 | Critical above
 
 
 ## zipper
@@ -208,4 +208,4 @@ Thresholds derived automatically via percentile-based splitting of defective tes
 | split_teeth | 18 | 26.1 | 41.68 | 31.33 |
 | squeezed_teeth | 16 | 21.0 | 36.79 | 29.72 |
 
-**Thresholds:** None ≤ 35.77 | Minor ≤ 35.78 | Moderate ≤ 35.79 | Critical above
+**Thresholds:** None ≤ 32.85 | Minor ≤ 32.86 | Moderate ≤ 35.29 | Critical above

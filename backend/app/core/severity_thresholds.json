@@ -1,77 +1,77 @@
 {
   "bottle": {
-    "none_ceiling": 33.26,
+    "none_ceiling": 32.9,
     "minor_ceiling": 41.48,
     "moderate_ceiling": 44.87
   },
   "cable": {
-    "none_ceiling": 47.95,
-    "minor_ceiling": 47.96,
-    "moderate_ceiling": 47.97
+    "none_ceiling": 42.28,
+    "minor_ceiling": 42.29,
+    "moderate_ceiling": 45.42
   },
   "capsule": {
-    "none_ceiling": 49.74,
-    "minor_ceiling": 49.75,
-    "moderate_ceiling": 49.76
+    "none_ceiling": 40.87,
+    "minor_ceiling": 40.88,
+    "moderate_ceiling": 40.89
   },
   "carpet": {
-    "none_ceiling": 30.23,
+    "none_ceiling": 29.42,
     "minor_ceiling": 38.79,
     "moderate_ceiling": 44.26
   },
   "grid": {
-    "none_ceiling": 42.03,
-    "minor_ceiling": 42.04,
-    "moderate_ceiling": 42.05
+    "none_ceiling": 39.16,
+    "minor_ceiling": 39.17,
+    "moderate_ceiling": 41.61
   },
   "hazelnut": {
-    "none_ceiling": 41.96,
+    "none_ceiling": 38.77,
     "minor_ceiling": 44.29,
     "moderate_ceiling": 47.4
   },
   "leather": {
-    "none_ceiling": 31.62,
+    "none_ceiling": 29.0,
     "minor_ceiling": 44.51,
     "moderate_ceiling": 50.25
   },
   "metal_nut": {
-    "none_ceiling": 36.18,
+    "none_ceiling": 34.57,
     "minor_ceiling": 41.01,
     "moderate_ceiling": 44.54
   },
   "pill": {
-    "none_ceiling": 36.48,
-    "minor_ceiling": 36.49,
+    "none_ceiling": 35.05,
+    "minor_ceiling": 35.06,
     "moderate_ceiling": 37.85
   },
   "screw": {
-    "none_ceiling": 43.07,
-    "minor_ceiling": 43.08,
-    "moderate_ceiling": 43.09
+    "none_ceiling": 35.1,
+    "minor_ceiling": 35.11,
+    "moderate_ceiling": 37.28
   },
   "tile": {
-    "none_ceiling": 39.81,
-    "minor_ceiling": 39.82,
+    "none_ceiling": 36.51,
+    "minor_ceiling": 38.07,
     "moderate_ceiling": 42.88
   },
   "toothbrush": {
-    "none_ceiling": 49.07,
-    "minor_ceiling": 49.08,
-    "moderate_ceiling": 49.09
+    "none_ceiling": 48.45,
+    "minor_ceiling": 48.46,
+    "moderate_ceiling": 48.47
   },
   "transistor": {
-    "none_ceiling": 46.39,
-    "minor_ceiling": 46.4,
-    "moderate_ceiling": 46.41
+    "none_ceiling": 42.84,
+    "minor_ceiling": 42.85,
+    "moderate_ceiling": 45.59
   },
   "wood": {
-    "none_ceiling": 36.0,
+    "none_ceiling": 34.88,
     "minor_ceiling": 43.77,
     "moderate_ceiling": 49.19
   },
   "zipper": {
-    "none_ceiling": 35.77,
-    "minor_ceiling": 35.78,
-    "moderate_ceiling": 35.79
+    "none_ceiling": 32.85,
+    "minor_ceiling": 32.86,
+    "moderate_ceiling": 35.29
   }
 }
