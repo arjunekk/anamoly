@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Sidebar from "./components/Sidebar";
 import ImageUpload from "./components/ImageUpload";
 import InspectionResults from "./components/InspectionResults";
 import Dashboard from "./pages/Dashboard";
@@ -15,7 +16,6 @@ function InspectionPage() {
     setIsLoading(true);
     setError(null);
     setResult(null);
-
     try {
       const data = await inspectImage(file, category);
       setResult(data);
@@ -27,45 +27,35 @@ function InspectionPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 flex flex-col items-center py-12 px-4">
-      <h1 className="text-2xl font-bold text-gray-800 mb-8">
-        Industrial Defect Detection
+    <div className="flex flex-col items-center py-10 px-6">
+      <h1
+        className="text-2xl font-medium text-neutral-900 dark:text-neutral-50 mb-8 tracking-tight"
+        style={{ fontFamily: "var(--font-display)" }}
+      >
+        Inspect
       </h1>
-
       <ImageUpload onSubmit={handleSubmit} isLoading={isLoading} />
-
-      {error && <p className="mt-4 text-red-600 text-sm">Error: {error}</p>}
-
+      {error && (
+        <p className="mt-4 text-sm text-red-600 dark:text-red-400">Error: {error}</p>
+      )}
       <InspectionResults result={result} />
     </div>
-  );
-}
-
-function NavBar() {
-  return (
-    <nav className="bg-white border-b px-6 py-3 flex gap-6">
-      <Link to="/" className="font-medium text-gray-700 hover:text-blue-600">
-        Inspect
-      </Link>
-      <Link to="/dashboard" className="font-medium text-gray-700 hover:text-blue-600">
-        Dashboard
-      </Link>
-      <Link to="/history" className="font-medium text-gray-700 hover:text-blue-600">
-        History
-      </Link>
-    </nav>
   );
 }
 
 function App() {
   return (
     <BrowserRouter>
-      <NavBar />
-      <Routes>
-        <Route path="/" element={<InspectionPage />} />
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/history" element={<History />} />
-      </Routes>
+      <div className="flex min-h-screen bg-white dark:bg-neutral-950 transition-colors">
+        <Sidebar />
+        <div className="flex-1 overflow-auto">
+          <Routes>
+            <Route path="/" element={<InspectionPage />} />
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/history" element={<History />} />
+          </Routes>
+        </div>
+      </div>
     </BrowserRouter>
   );
 }
